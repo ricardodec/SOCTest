@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+
+    <constant name="struts.devMode" value="false"/>
+    <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
+	<constant name="struts.action.extension" value="xhtml,,xml,json,action"/>
+	
+	<constant name="struts.mapper.class" value="org.apache.struts2.dispatcher.mapper.Restful2ActionMapper" />
+	<constant name="struts.mapper.class" value="org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper" />
+	<constant name="struts.mapper.prefixMapping" value="/rest:restful2,:struts" />
+	<constant name="struts.enable.SlashesInActionNames" value="true" />
+	<constant name="struts.mapper.alwaysSelectFullNamespace" value="false" />
+	
+	<constant name="struts.actionProxyFactory" value="prefix"/>
+	<constant name="struts.convention.action.suffix" value="Action"/>
+	<constant name="struts.convention.action.mapAllMatches" value="true"/>
+	<constant name="struts.convention.default.parent.package" value="rest-default"/>
+	<constant name="struts.convention.package.locators" value="br.com.soc.rest"/>
+  
+    <package name="myPackage" extends="struts-default">
+
+        <default-action-ref name="index" />
+
+        <action name="index">
+			<result name="success" type="redirect">listExame</result>
+        </action>
+		
+		<action name="listExame" class="br.com.soc.action.ExameAction" method="list">
+			<result name="success">/WEB-INF/exame/list.jsp</result>
+		</action>
+		
+		<action name="addExame" class="br.com.soc.action.ExameAction" method="add">
+			<result name="success">/WEB-INF/exame/edit.jsp</result>
+		</action>
+		
+		<action name="editExame" class="br.com.soc.action.ExameAction" method="edit">
+			<result name="success">/WEB-INF/exame/edit.jsp</result>
+		</action>
+		
+		<action name="deleteExame" class="br.com.soc.action.ExameAction" method="delete">
+            <result name="input">/WEB-INF/exame/list.jsp</result>
+			<result name="success" type="redirect">ExameList</result>
+		</action>
+		
+		<action name="saveOrUpdateExame" class="br.com.soc.action.ExameSaveAction" method="execute">
+            <result name="input">/WEB-INF/exame/edit.jsp</result>
+			<result name="success" type="redirect">ExameList</result>
+		</action>
+		
+    </package>
+
+	<package name="rest" namespace="/rest" extends="struts-default">
+	    <action name="exame/*" class="br.com.soc.rest.ExameController" method="show">
+	        <param name="id">{1}</param>
+	    </action>
+	</package>
+</struts>

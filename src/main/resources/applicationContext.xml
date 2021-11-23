@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans>
+    <bean id="ExameAction" class="br.com.soc.action.ExameAction" scope="prototype"/>
+    <bean id="ExameSaveAction" class="br.com.soc.action.ExameSaveAction" scope="prototype"/>
+</beans>
+
